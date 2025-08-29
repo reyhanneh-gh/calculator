@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="style/master.css">
+    <link rel="stylesheet" href="style/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontello.css">
+</head>
+
+<body class="h-[100vh] flex justify-center items-center bg-gray-900">
+    <div id="calc" class="w-[350px] h-[500px] mybg rounded-2xl flex justify-center items-center">
+        <div class="w-[346px] h-[496px] bg-gray-900 rounded-2xl p-3 flex flex-wrap items-center">
+            <input type="text" placeholder="0" id="inp"
+                class="w-full h-[80px] rounded-2xl bg-slate-800 p-3.5 flex items-center text-end text-amber-50 text-3xl favfont1 my-2.5">
+
+            <section
+                class="w-full h-fit flex flex-wrap justify-center items-center gap-2.5 *:w-1/5 *:h-[50px] *:rounded-full *:text-3xl *:flex *:justify-center *:items-center *:text-gray-300 *:p-1.5 *:cursor-pointer *:hover:scale-[0.9] *:duration-200 *:hover:shadow-[0_0px_10px_pink]">
+                <div id="superscript" onclick="num(this)" class="bg-pink-800 icon-superscript"></div>
+                <div id="square" onclick="num(this)" class="bg-pink-800 icon-math"></div>
+                <div id="mod" onclick="num(this)" class="bg-pink-800 icon-percent"></div>
+                <div id="cancel" onclick="num(this)" class="bg-pink-800 icon-cancel-alt"></div>
+                <div onclick="num(this)" class="border-2 border-pink-900">1</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">2</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">3</div>
+                <div id="multiply" onclick="num(this)" class="bg-pink-800 icon-cancel"></div>
+                <div onclick="num(this)" class="border-2 border-pink-900">4</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">5</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">6</div>
+                <div id="divide" onclick="num(this)" class="bg-pink-800 icon-divide"></div>
+                <div onclick="num(this)" class="border-2 border-pink-900">7</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">8</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">9</div>
+                <div id="plus" onclick="num(this)" class="bg-pink-800 icon-plus"></div>
+                <div onclick="num(this)" class="border-2 border-pink-900">.</div>
+                <div onclick="num(this)" class="border-2 border-pink-900">0</div>
+                <div onclick="calculate()" class="border-2 border-pink-900 icon-eq"></div>
+                <div id="minus" onclick="num(this)" class="bg-pink-800 icon-minus"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        let _inp = document.getElementById('inp')
+        let operator = ""
+        let num1 = ""
+        let num2 = ""
+
+        function num(s) {
+            if (s.id === 'cancel') {
+                _inp.value = ""
+                num1 = ""
+                num2 = ""
+                operator = ""
+                return
+            }
+
+            let temp = s.innerText
+
+            if (s.id === 'multiply') temp = '*'
+            else if (s.id === 'divide') temp = '/'
+            else if (s.id === 'plus') temp = '+'
+            else if (s.id === 'minus') temp = '-'
+            else if (s.id === 'superscript') temp = '^2'
+            else if (s.id === 'square') temp = '^0.5'
+            else if (s.id === 'mod') temp = '%'
+
+            _inp.value += temp
+
+            let op = ['*', '/', '+', '-', '^2', '^0.5', '%']
+            let found = false
+            for (let i = 0; i < op.length; i++) {
+                if (_inp.value.indexOf(op[i]) !== -1) {
+                    found = true
+                    operator = op[i]
+                    break
+                }
+            }
+
+            if (!found) return
+
+            num1 = ""
+            num2 = ""
+
+            let opIndex = _inp.value.indexOf(operator)
+
+            for (let i = 0; i < opIndex; i++) {
+                if (_inp.value[i] !== " ") {
+                    num1 += _inp.value[i]
+                }
+            }
+
+            if (operator !== '^2' && operator !== '^0.5') {
+                for (let i = opIndex + operator.length; i < _inp.value.length; i++) {
+                    if (_inp.value[i] !== " ") {
+                        num2 += _inp.value[i]
+                    }
+                }
+            }
+        }
+
+        function calculate() {
+            let result = 0
+
+            if (operator === '^2') {
+                num1 = +num1
+                result = num1 ** 2
+            }
+            else if (operator === '^0.5') {
+                num1 = +num1
+                result = num1 ** 0.5
+            }
+            else {
+                num1 = +num1
+                num2 = +num2
+
+                if (operator === '*') result = num1 * num2
+                else if (operator === '/') {
+                    if (num2 !== 0) result = num1 / num2
+                    else result = "undefined"
+                }
+                else if (operator === '+') result = num1 + num2
+                else if (operator === '-') result = num1 - num2
+                else if (operator === '%') result = num1 % num2
+            }
+
+            _inp.value = result
+            num1 = ""
+            num2 = ""
+            operator = ""
+        }
+    </script>
+</body>
+
+</html>
