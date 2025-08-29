@@ -174,11 +174,20 @@
   .m-48 {
     margin: calc(var(--spacing) * 48);
   }
+  .m-53 {
+    margin: calc(var(--spacing) * 53);
+  }
   .m-280 {
     margin: calc(var(--spacing) * 280);
   }
   .m-300 {
     margin: calc(var(--spacing) * 300);
+  }
+  .m-428 {
+    margin: calc(var(--spacing) * 428);
+  }
+  .m-821 {
+    margin: calc(var(--spacing) * 821);
   }
   .my-2 {
     margin-block: calc(var(--spacing) * 2);
@@ -203,6 +212,12 @@
   }
   .h-\[450px\] {
     height: 450px;
+  }
+  .h-\[546px\] {
+    height: 546px;
+  }
+  .h-\[550px\] {
+    height: 550px;
   }
   .h-fit {
     height: fit-content;
@@ -354,6 +369,15 @@
     :is(& > *) {
       --tw-duration: 200ms;
       transition-duration: 200ms;
+    }
+  }
+  .\*\:hover\:scale-\[0\.9\] {
+    :is(& > *) {
+      &:hover {
+        @media (hover: hover) {
+          scale: 0.9;
+        }
+      }
     }
   }
   .\*\:hover\:scale-\[0\.93\] {
