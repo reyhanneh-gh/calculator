@@ -30,5 +30,8 @@ This calculator was developed as part of my journey into mastering JavaScript ba
 ### 🧑‍🎨 Credits  
 **Developed by**: Reyhaneh Ghalambor  
 **Date**: August 30, 2025  
-**Mentor**: Parsa Ghorbanian  
+**Mentor**: Parsa Ghorbanian
+
+---
+
 <img width="1919" height="903" alt="Screenshot 2025-08-30 024740" src="https://github.com/user-attachments/assets/c0e1803d-dd7e-4c4e-9744-02c32718fe4b" />
